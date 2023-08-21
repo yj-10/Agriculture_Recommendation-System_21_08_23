@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+    body,
+    p,
+    input,
+    button {
+      font-family: "Montserrat", sans-serif;
+      letter-spacing: -0.2px;
+      font-size: 16px;
+    }
+    .headers {
+      width: 100% !important;
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: 80px;
+      background-color: #fff;
+      z-index: 100;
+      box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .form {
+      padding: 135px;
+      width: 520px;
+      box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #fff;
+      margin: 0 auto;
+    }
+    button,
+    input {
+      border: 0;
+      outline: 0;
+      font-size: 16px;
+      width: 500px;
+      border-radius: 320px;
+      padding: 16px;
+      background-color: #ebecf0;
+      text-shadow: 1px 1px 0 #fff;
+    }
+    @media screen and (max-width: 600px) {
+      input {
+        width: 350px;
+        padding: 10px;
+      }
+
+      button {
+        width: 350px;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      input,
+      button {
+        width: 250px;
+      }
+    }
+
+    .flex-box {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+      color: #03960f;
+    }
+
+    .title {
+      padding: 32px 0;
+      text-align: center;
+      color: #03960f;
+    }
+
+    input {
+      /* margin-right: 8px; */
+      box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+      /* width: 100%; */
+      box-sizing: border-box;
+      transition: all 0.2s ease-in-out;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    input:focus {
+      box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+    }
+
+    button {
+      color: #ffffff;
+      background-color: #037e0d;
+
+      font-weight: bold;
+      box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+    }
+    button:active {
+      box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+    }
+  </style>
+  <body>
+    <div class="headers">
+      <div class="">
+        <img
+          src="https://infosense.tech/_next/static/media/logo.d34a12c6.png"
+          style="height: 45px; width: 180px"
+          alt="no-img"
+        />
+      </div>
+
+      <div style="padding-top: 15px">
+        <p>Contact Us :- +91 - 9343017165</p>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row d-flex align-items-center">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="img-box">
+            <!-- <img src="templates\img.png" class="img-fluid" alt="" /> -->
+            <img src="{{ url_for('static', filename='img.png') }}" alt="Image">
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12">
+          <div class="title">
+            <h1><b>Agriculture Crop Recommendation System</b></h1>
+          </div>
+          <form action="/predict" method="POST">
+            <div class="flex-box">
+              <div class="mb-2">
+                <label for=""><b>Nitrogen</b></label>
+
+                <br />
+                <input
+                  type="number"
+                  id="Nitrogen"
+                  name="Nitrogen"
+                  placeholder="Enter Nitrogen"
+                />
+                <!-- <input type="text" class="" /> -->
+              </div>
+              <div class="mb-2">
+                <label for=""><b>Phosphorus</b></label>
+                <br />
+                <!-- <input type="text" /> -->
+                <input
+                  type="number"
+                  id="Phosporus"
+                  name="Phosporus"
+                  placeholder="Enter Phosphorus"
+                  required
+                />
+              </div>
+
+              <div class="mb-2">
+                <label for=""><b>Potassium</b></label>
+                <br />
+                <!-- <input type="text" class="" /> -->
+                <input
+                  type="number"
+                  id="Potassium"
+                  name="Potassium"
+                  placeholder="Enter Potassium"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <label for=""><b>Temperature</b></label>
+                <br />
+                <!-- <input type="text" /> -->
+                <input
+                  type="number"
+                  step="0.01"
+                  id="Temperature"
+                  name="Temperature"
+                  placeholder="Enter Temperature"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <label for=""><b>Humidity</b></label>
+                <br />
+                <!-- <input type="text" class="" /> -->
+                <input
+                  type="number"
+                  step="0.01"
+                  id="Humidity"
+                  name="Humidity"
+                  placeholder="Enter Humidity"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <label for=""><b>pH</b></label>
+                <br />
+                <!-- <input type="text" /> -->
+                <input
+                  type="number"
+                  step="0.01"
+                  id="Ph"
+                  name="Ph"
+                  placeholder="Enter pH"
+                  required
+                />
+              </div>
+
+              <div class="mb-2">
+                <label for=""><b>Rainfall</b></label>
+                <br />
+                <!-- <input type="text" class="" /> -->
+                <input
+                  type="number"
+                  step="0.01"
+                  id="Rainfall"
+                  name="Rainfall"
+                  placeholder="Enter Rainfall"
+                  required
+                />
+              </div>
+              <div class="mb-2">
+                <br />
+                <button type="submit" class="">Submit</button>
+              </div>
+            </div>
+            <div class="result ms-5 mt-5">
+              
+              <h1 class=""><b>Result : {{ result }} </b></h1>
+           
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-wrapper">
+      <div class="container">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-6 col-sm-12 col-md-6">
+            <div class="footer_content text-capitalize">
+              Copyright © Infosense ai Pvt. Ltd.
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              All rights reserved
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <ul>
+              <li><i class="fa-brands fa-facebook"></i></li>
+              <li><i class="fa-brands fa-google"></i></li>
+              <li><i class="fa-brands fa-linkedin"></i></li>
+              <li><i class="fa-brands fa-twitter"></i></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <form>
+      <div class="segment">
+        <h1>Agriculture Crop Recommendation System</h1>
+      </div>
+
+      <label>
+        <label><b>Nitrogen</b></label>
+        <input type="Name" placeholder="Enter Nitrogen" />
+      </label>
+
+      <label>
+        <label><b>Phosphorus</b></label>
+        <input type="Name" placeholder="Enter Phosphorus" />
+      </label>
+      <label>
+        <label><b>Potassium</b></label>
+        <input type="Name" placeholder="Enter Potassium" />
+      </label>
+      <label>
+        <label><b>Temperature</b></label>
+        <input type="Name" placeholder="Enter Temperature" />
+      </label>
+      <label>
+        <label><b>Humidity</b></label>
+        <input type="Name" placeholder="Enter Humidity" />
+      </label>
+      <label>
+        <label><b>pH</b></label>
+        <input type="Name" placeholder="Enter pH" />
+      </label>
+      <label>
+        <label><b>Rainfall</b></label>
+        <input type="Name" placeholder="Enter Rainfall" />
+      </label>
+
+      <button class="red" type="button">
+        <i class="icon ion-md-lock"></i> Submit
+      </button> -->
+
+    <!-- <div class="segment">
+    <button class="unit" type="button"><i class="icon ion-md-arrow-back"></i></button>
+    <button class="unit" type="button"><i class="icon ion-md-bookmark"></i></button>
+    <button class="unit" type="button"><i class="icon ion-md-settings"></i></button>
+  </div>
+   -->
+    <!-- <div class="input-group">
+        <label>
+          <h1 style="color: #000000">Result :</h1>
+        </label>
+        <button class="unit" type="button"><i class="icon ion-md-search"></i></button> -->
+    <!-- </div>
+    </form> -->
+  </body>
+</html>
+<style>
+  .footer-wrapper {
+    position: relative;
+    margin-top: 240px;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 10px 0px;
+  }
+
+  .footer-wrapper ul {
+    position: relative;
+  }
+  .footer-wrapper ul li {
+    list-style-type: none;
+    margin: 0px 10px;
+    margin-top: 12px;
+    display: inline-block;
+  }
+
+  .footer-wrapper ul li i {
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(45deg, #0adf7493, #026810);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    font-size: 14px;
+  }
+</style>
+<style>
+  /* body,
+  html {
+    background-color: #ebecf0;
+  }
+  body,
+  p,
+  input,
+  select,
+  textarea,
+  button {
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+  }
+  div,
+  p {
+    color: #babecc;
+    text-shadow: 1px 1px 1px #fff;
+  }
+  form {
+    padding: 135px;
+    width: 520px;
+    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #fff;
+    margin: 0 auto;
+  }
+  .segment {
+    padding: 32px 0;
+    text-align: center;
+    color: #176b6b;
+  }
+  button,
+  input { */
+  /* border: 0;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 320px;
+    padding: 16px;
+    background-color: #ebecf0;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  label {
+    display: block;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+  input {
+    margin-right: 8px;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  input:focus {
+    box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+  }
+  button {
+    color: #61677c;
+    font-weight: bold;
+    box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  button:hover {
+    box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
+  }
+  button:active {
+    box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+  }
+  button .icon {
+    margin-right: 8px;
+  }
+  button.unit {
+    border-radius: 8px;
+    line-height: 0;
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 8px;
+    font-size: 19.2px;
+  }
+  button.unit .icon {
+    margin-right: 0;
+  }
+  button.red {
+    display: block;
+    width: 100%;
+    color: #ae1100;
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .input-group label {
+    margin: 0;
+    flex: 1;
+  } */
+</style>
